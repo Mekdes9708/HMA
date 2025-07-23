@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HMA Progress Report | Feb – July 2025</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #1d1d1b;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo {
+      height: 60px;
+    }
+    .title {
+      color: #0072ce;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .card h3 {
+      color: #0072ce;
+      margin-bottom: 10px;
+    }
+    .btn, .download-btn {
+      background: #0072ce;
+      color: #fff;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      text-align: center;
+    }
+    .grid button {
+      background: #f0f7ff;
+      padding: 15px;
+      border: 1px solid #d0eaff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .details {
+      display: none;
+      margin-top: 10px;
+      font-size: 14px;
+      background: #eef5ff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="538-5383404_humanity-inclusion-logo-hd-png-download.png" class="logo" alt="HI Logo" />
+    <div class="title">HMA Progress Report | Feb – July 2025</div>
+  </div>
+
+  <div class="card">
+    <h3>🔑 Summary KPIs (Click to View Details)</h3>
+    <div class="grid">
+      <button onclick="toggleDetail('eore')">EORE<br><strong>2575 beneficiaries</strong></button>
+      <button onclick="toggleDetail('nts')">NTS<br><strong>1 hazard areas</strong></button>
+      <button onclick="toggleDetail('eod')">EOD<br><strong>53 tasks / 138 items</strong></button>
+      <button onclick="toggleDetail('va')">Victim Assistance<br><strong>Services Provided</strong></button>
+    </div>
+
+    <div id="eore" class="details">
+      <h4>EORE Summary</h4>
+      <p>2575 people reached through 103 sessions in schools, markets, and IDP areas. Beneficiaries were:</p>
+      <canvas id="demographicsChart"></canvas>
+    </div>
+
+    <div id="nts" class="details">
+      <h4>NTS Summary</h4>
+      <p>A total of <strong>88 Non-Technical Surveys (NTS)</strong> were conducted:</p>
+      <ul>
+        <li><strong>Hintalo:</strong> 2 surveys – 2 evidence found (direct/indirect)</li>
+        <li><strong>Sharti:</strong> 86 surveys – 50 evidence found, 36 with no evidence</li>
+      </ul>
+      <p>These activities covered <strong>27 kebeles</strong> in total and significantly contributed to identifying EO hazards in the region.</p>
+    </div>
+
+    <div id="eod" class="details">
+      <h4>EOD Summary</h4>
+      <p><strong>53 EOD spot tasks</strong> were completed. A total of <strong>138 explosive items</strong> were located and mitigated, all of which were classified as UXO:</p>
+      <ul>
+        <li>24 Projectiles</li>
+        <li>12 Rockets</li>
+        <li>8 Mortars</li>
+        <li>1 Grenade</li>
+        <li>3 Unknown Items</li>
+        <li>5 AXO (Abandoned Explosive Ordnance)</li>
+      </ul>
+      <p><strong>Hazard Area:</strong> 344,337 m²<br/>
+      <strong>Intended Land Use:</strong> Agriculture<br/>
+      <strong>Explosive Type:</strong> UXO<br/>
+      <strong>Total EO Collected/Mitigated:</strong> 138</p>
+      <canvas id="eodChart"></canvas>
+    </div>
+
+    <div id="va" class="details">
+  <h4>Victim Assistance Summary</h4>
+  <p>Total Beneficiaries: <strong>564</strong> (Female: 110, Male: 454)</p>
+  <ul>
+    <li>MHPSS: 176 supported (Female: 31, Male: 145)</li>
+    <li>Physical & Financial Rehabilitation: 157 supported (Female: 33, Male: 124)</li>
+    <li>Economic Empowerment: 59 supported (Female: 19, Male: 40)</li>
+    <li>Emergency & Medical Referral: 157 supported (Female: 27, Male: 126)</li>
+  </ul>
+      <canvas id="vaChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🗺️ Map of Contaminated Woredas – Saharti, Tigray</h3>
+    <iframe src="MTT1-CDCS Contaminated Map.pdf"></iframe>
+    <p><em>This map highlights confirmed EO hazard areas in Saharti woreda (e.g., Cheli, Waza, Gijet, Amdi Woyane, etc.), based on CDCS team operations.</em></p>
+    <a href="MTT1-CDCS Contaminated Maplets generate the pd for my report on overleaf .pdf" class="download-btn" download>📥 Download Map PDF</a>
+  </div>
+
+  <div style="text-align: center; margin-top: 30px">
+    <a href="HMA_Report.pdf" class="download-btn" download>⬇️ Download Full Report as PDF</a>
+  </div>
+
+  <script>
+    function toggleDetail(id) {
+      document.querySelectorAll('.details').forEach(el => {
+        el.style.display = (el.id === id && el.style.display !== 'block') ? 'block' : 'none';
+      });
+    }
+
+    const total = 2675;
+    const maleTotal = 167 + 646 + 274;
+    const femaleTotal = 236 + 784 + 468;
+
+    new Chart(document.getElementById("demographicsChart"), {
+      type: "bar",
+      data: {
+        labels: ["Children (0–12)", "Youth (13–17)", "Adults (18–59)"],
+        datasets: [
+          {
+            label: "Female",
+            data: [
+              (236 / total * 100).toFixed(1),
+              (784 / total * 100).toFixed(1),
+              (468 / total * 100).toFixed(1)
+            ],
+            backgroundColor: "#74c0fc"
+          },
+          {
+            label: "Male",
+            data: [
+              (167 / total * 100).toFixed(1),
+              (646 / total * 100).toFixed(1),
+              (274 / total * 100).toFixed(1)
+            ],
+            backgroundColor: "#0072ce"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `${context.dataset.label}: ${context.raw}%`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Percentage of Total Beneficiaries (%)"
+            },
+            max: 100
+          }
+        }
+      }
+    });
+
+    new Chart(document.getElementById("eodChart"), {
+      type: "bar",
+      data: {
+        labels: ["Projectiles", "Rockets", "Mortars", "Grenade", "Unknown", "AXO"],
+        datasets: [{
+          label: "EOD Items",
+          data: [24, 12, 8, 1, 3, 5],
+          backgroundColor: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: "Count" }
+          }
+        }
+      }
+    });
+
+    new Chart(document.getElementById("vaChart"), {
+      type: "bar",
+      data: {
+        labels: ["MHPSS", "Rehabilitation", "Econ. Empowerment", "Medical Referral"],
+        datasets: [
+          {
+            label: "Female",
+            data: [31, 33, 19, 27],
+            backgroundColor: "#74c0fc"
+          },
+          {
+            label: "Male",
+            data: [145, 124, 40, 126],
+            backgroundColor: "#0072ce"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
